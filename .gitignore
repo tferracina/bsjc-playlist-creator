@@ -1,0 +1,17 @@
+# Virtual env
+venv/
+
+# Cache
+__pycache__/
+cache/
+
+# Whatsapp txt files
+chat/
+
+# Configs and Logs
+config.ini
+logs/
+
+# Mac files
+.DS_Store
+
