@@ -2,7 +2,6 @@ from playlist_updater import SpotifyPlaylistUpdater
 import time
 import os 
 import logging
-import backoff
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 from requests.exceptions import ReadTimeout, ConnectionError
@@ -24,13 +23,6 @@ class Watcher(FileSystemEventHandler):
         self.updater = SpotifyPlaylistUpdater()
         self.watch_directory = watch_directory
         self.processed_files = set()
-
-    @backoff.on_exception(
-        backoff.expo,
-        (ReadTimeout, ConnectionError),
-        max_tries=5,
-        max_time=300
-    )
 
     def on_created(self, event):
         if event.is_directory:
